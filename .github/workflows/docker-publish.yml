@@ -39,17 +39,17 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
-        id: docker_build
+        id: docker_build_web
         uses: docker/build-push-action@v2
         with:
           file: web.Dockerfile
           push: true
-          tags: deviantshark/logout4shell-web:latest
+          tags: b4s71/logout4shell-web:latest
       -
         name: Build and push
-        id: docker_build
+        id: docker_build_ldap
         uses: docker/build-push-action@v2
         with:
           file: ldap.Dockerfile
           push: true
-          tags: deviantshark/logout4shell-ldap:latest
+          tags: b4s71/logout4shell-ldap:latest
