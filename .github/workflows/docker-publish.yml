@@ -44,7 +44,7 @@ jobs:
         with:
           file: web.Dockerfile
           push: true
-          tags: b4s71/logout4shell-web:latest
+          tags: b4s71/logout4docker-web:latest
       -
         name: FORGED-LDAPSERVER-->Build and push
         id: docker_build_ldap
@@ -52,4 +52,4 @@ jobs:
         with:
           file: ldap.Dockerfile
           push: true
-          tags: b4s71/logout4shell-ldap:latest
+          tags: b4s71/logout4docker-ldap:latest
