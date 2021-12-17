@@ -1,0 +1,23 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build WEB image
+      run: docker build . --file Dockerfile --target webserver --tag b4s71/logout4docker-web:latest --tag b4s71/logout4docker-web:$(date +%s)
+      
+    - uses: actions/checkout@v2
+    - name: Build LDAP image
+      run: docker build . --file Dockerfile --target ldapserver --tag b4s71/logout4docker-ldap:latest --tag b4s71/logout4docker-ldap:$(date +%s)
+
