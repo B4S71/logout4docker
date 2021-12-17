@@ -38,7 +38,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build and push
+        name: PYTHON-WEBSERVER-->Build and push
         id: docker_build_web
         uses: docker/build-push-action@v2
         with:
@@ -46,7 +46,7 @@ jobs:
           push: true
           tags: b4s71/logout4shell-web:latest
       -
-        name: Build and push
+        name: FORGED-LDAPSERVER-->Build and push
         id: docker_build_ldap
         uses: docker/build-push-action@v2
         with:
