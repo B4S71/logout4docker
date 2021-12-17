@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logout4j
+  labels:
+    app: security
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logout4j
+  template:
+    metadata:
+      labels:
+        app: logout4j
+    spec:
+      containers:
+        - name: web-end
+          image: docker.io/b4s71/logout4docker-web:latest
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "0.5"
+          ports:
+            - containerPort: 8888
+          readinessProbe:
+              initialDelaySeconds: 1
+              periodSeconds: 5
+              timeoutSeconds: 1
+              successThreshold: 1
+              failureThreshold: 1
+              tcpSocket:
+                host: web-end
+                port: 8888
+        - name: ldap-end
+          image: docker.io/b4s71/logout4docker-ldap:latest
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "0.5"
+          ports:
+            - containerPort: 1389
