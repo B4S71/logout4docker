@@ -1,16 +1,11 @@
 FROM ubuntu:21.04 as webserver-builder
 
 
-RUN mkdir /opt/build_logout4shell
+RUN mkdir -p /opt/build_logout4shell
 WORKDIR /opt/build_logout4shell
-RUN apt-get update && apt-get install -y git default-jdk maven
-RUN git clone https://github.com/cybereason/Logout4Shell.git && cd ./Logout4Shell && git checkout eee6cd3 && mvn package && ls ./target/classes
-RUN mkdir /opt/build_logout4shell
-WORKDIR /opt/build_logout4shell
-RUN apt-get update && apt-get install -y git default-jdk maven
-
-
-RUN git clone https://github.com/mbechler/marshalsec.git && cd ./marshalsec && git checkout f645788 && mvn clean package -DskipTests && ls ./target/classes
+RUN apt-get update && apt-get install -y git default-jdk maven python3
+RUN cd /opt/build_logout4shell && git clone https://github.com/cybereason/Logout4Shell.git && cd ./Logout4Shell && git checkout eee6cd3 && mvn package && ls ./target/classes
+RUN cd /opt/build_logout4shell && git clone https://github.com/mbechler/marshalsec.git && cd ./marshalsec && git checkout f645788 && mvn clean package -DskipTests && ls ./target/classes
 
 
 
