@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: honeypot
+  labels:
+    app: honeypot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: honeypot
+  template:
+    metadata:
+      labels:
+        app: honeypot
+    spec:
+      containers:
+        - name: log4shell-vulnerable-app
+          image: ghcr.io/christophetd/log4shell-vulnerable-app
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "0.5"
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            initialDelaySeconds: 1
+            periodSeconds: 5
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 1
+            tcpSocket:
+              host: 
+              port: 8080
